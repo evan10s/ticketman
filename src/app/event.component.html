@@ -1,0 +1,13 @@
+<div>
+  <ul>
+    <li *ngFor="let event of eventsList" (click)="onSelect(event)">
+      {{ event.name }}
+    </li>
+  </ul>
+</div>
+<div *ngIf="selectedEvent">
+  <h2>{{selectedEvent.name}}</h2>
+  <h3>Hosted by {{ selectedEvent.host }}</h3>
+  <p>Starts {{ selectedEvent.startDate | date: 'short' }}</p>
+  <p>Ends {{ selectedEvent.endDate | date: 'short' }}</p>
+</div>
