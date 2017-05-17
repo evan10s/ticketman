@@ -1,0 +1,12 @@
+<div *ngIf="event !== 'none'">
+  <h2>{{event.name}}</h2>
+  <h3>Hosted by {{ event.host }}</h3>
+  <p>Starts {{ event.startDate | date: 'short' }}</p>
+  <p>Ends {{ event.endDate | date: 'short' }}</p>
+</div>
+<div *ngIf="!event">
+  Loading...
+</div>
+<div *ngIf="event === 'none'">
+  That event doesn't exist yet.  Make an event today!
+</div>

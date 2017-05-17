@@ -1,45 +1,31 @@
 import { Component } from '@angular/core'
-
+import { EventsListService } from './events-list.service';
+import { Event } from './event';
+import { Router } from '@angular/router';
 @Component({
   selector: "events",
   templateUrl: "./event.component.html",
   styles: [ `
-    li:first-child {
+    .current {
       color: blue;
     }
-  `]
+  `,"assets/global.css"],
+  providers: [EventsListService]
 })
 export class EventComponent {
-  eventsList: Event[] = [
-    { name: "Fluffy Bonanza 2017",
-      startDate: new Date(2017,6,14,12,30),
-      endDate: new Date(2017,6,17,18,30),
-      location: "Centennial Olympic Park",
-      host: "Fluffy"
-    },
-    { name: "Fluffy Bonanza 2018",
-      startDate: new Date(2018,6,15,12,30),
-      endDate: new Date(2018,6,18,18,30),
-      location: "Centennial Olympic Park",
-      host: "Fluffy"
-    },
-    { name: "Fluffy Bonanza 2019",
-      startDate: new Date(2019,6,16,12,30),
-      endDate: new Date(2019,6,19,18,30),
-      location: "Centennial Olympic Park",
-      host: "Baby Fluff"
-    },
-  ];
-  selectedEvent: Event;
-  onSelect(event: Event): void {
-    this.selectedEvent = event;
+  events: Event[];
+  constructor(
+    private eventsListService: EventsListService,
+    private router: Router
+  ) { }
+  isToday(event: Event): boolean {
+    const today = new Date();
+    return today >= event.startDate && today <= event.endDate;
   }
-}
-
-export class Event {
-  name: string;
-  startDate: Date;
-  endDate: Date;
-  location: string;
-  host: string;
+  getEvents(): Event[] {
+    return this.eventsListService.getEvents();
+  }
+  goToEvent(event: Event): void {
+    this.router.navigate(['/events',event.id])
+  }
 }

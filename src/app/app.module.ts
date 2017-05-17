@@ -5,18 +5,29 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { EventComponent } from './event.component';
+import { RouterModule } from '@angular/router';
+import { EventDetailsComponent } from './event-details/event-details.component';
+import { AppRoutingModule } from './app.routes';
+import { NavComponent } from './nav/nav.component';
+import { ClarityModule } from 'clarity-angular';
+import { UiModule } from './ui/ui.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EventComponent
+    EventComponent,
+    EventDetailsComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule,
+    ClarityModule.forRoot(),
+    UiModule
   ],
-  providers: [],
+  providers: [ EventComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
