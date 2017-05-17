@@ -42,3 +42,5 @@ testem.log
 Thumbs.db
 
 yarn.lock
+/src/environments
+/node_modules
