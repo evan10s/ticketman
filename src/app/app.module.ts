@@ -12,6 +12,12 @@ import { NavComponent } from './nav/nav.component';
 import { ClarityModule } from 'clarity-angular';
 import { UiModule } from './ui/ui.module';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+import { environment } from "../environments/environment";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +31,8 @@ import { UiModule } from './ui/ui.module';
     HttpModule,
     AppRoutingModule,
     ClarityModule.forRoot(),
-    UiModule
+    UiModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [ EventComponent ],
   bootstrap: [AppComponent]

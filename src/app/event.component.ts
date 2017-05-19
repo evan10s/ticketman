@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { EventsListService } from './events-list.service';
 import { Event } from './event';
 import { Router } from '@angular/router';
+import { AuthComponent } from './ui/auth/auth.component';
 @Component({
   selector: "events",
   templateUrl: "./event.component.html",
@@ -10,13 +11,14 @@ import { Router } from '@angular/router';
       color: blue;
     }
   `,"assets/global.css"],
-  providers: [EventsListService]
+  providers: [EventsListService, AuthComponent]
 })
 export class EventComponent {
   events: Event[];
   constructor(
     private eventsListService: EventsListService,
-    private router: Router
+    private router: Router,
+    private auth: AuthComponent
   ) { }
   isToday(event: Event): boolean {
     const today = new Date();
@@ -26,6 +28,9 @@ export class EventComponent {
     return this.eventsListService.getEvents();
   }
   goToEvent(event: Event): void {
-    this.router.navigate(['/events',event.id])
+    this.router.navigate(['/manage/events',event.id])
+  }
+  login() {
+    this.auth.login();
   }
 }

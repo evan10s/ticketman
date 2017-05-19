@@ -7,7 +7,8 @@ import { MainComponent } from './layout/main/main.component';
 import { ClarityModule } from 'clarity-angular';
 import { RouterModule } from '@angular/router';
 import { AboutComponent } from './layout/about/about.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; //MANY THANKS to https://github.com/angular/angular/issues/15087 for helping me find where BrowserAnimationsModule is
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthComponent } from './auth/auth.component'; //MANY THANKS to https://github.com/angular/angular/issues/15087 for helping me find where BrowserAnimationsModule is
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
     HeaderComponent,
     SidebarComponent,
     MainComponent,
-    AboutComponent]
+    AboutComponent],
+    providers: [ AuthComponent]
 })
 export class UiModule { }
