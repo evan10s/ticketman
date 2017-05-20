@@ -7,12 +7,14 @@ import { AuthComponent } from './ui/auth/auth.component';
 import { AuthGuard } from './ui/auth/auth-guard.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from './ui/auth/auth.service';
+import { AddEventComponent } from './add-event/add-event.component';
 const routes: Routes = [
 
   { path: 'a',
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'events'},
       { path: 'events', component: EventComponent, pathMatch: "full" },
+      { path: 'events/new', component: AddEventComponent },
       { path: 'events/:id',
       component: EventDetailsComponent } ],
     canActivate: [ AuthGuard ]
