@@ -1,0 +1,50 @@
+<!-- //from (some modifications have been made) Angular docs Dynamic Form cookbook: https://angular.io/docs/ts/latest/cookbook/dynamic-form.html -->
+<div class="form-group" [formGroup]="form">
+  <label  class="required">{{question.label}}</label>
+
+  <label [attr.for]="question.key" aria-haspopup="true" role="tooltip"
+  class="tooltip tooltip-top-left tooltip-validation tooltip-sm"  [class.invalid]="!isValid">
+    <input *ngIf="question.controlType === 'textbox'" [formControlName]="question.key"
+            [id]="question.key" [type]="question.type" [placeholder]="question.placeholder" [size]="question.inputSize">
+      <span *ngIf="!isValid" class="tooltip-content">{{question.label}} is required</span>
+
+
+    <select [id]="question.key" *ngIf="question.controlType === 'dropdown'" [formControlName]="question.key"
+[formControlName]="question.key">
+      <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+    </select>
+  </label>
+</div>
+
+
+
+
+<!-- <section class="form-block">
+    <label>Memory</label>
+    <div class="form-group">
+        <label class="required">Space</label>
+        <label for="validInput1" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation invalid tooltip-sm">
+            <input type="text" id="validInput1">
+            <span class="tooltip-content">
+                This field cannot be empty!
+            </span>
+        </label>
+
+</section> -->
+
+<!-- <div class="form-group" [formGroup]="form">
+  <label  class="required">{{question.label}}</label>
+
+  <label [attr.for]="question.key" aria-haspopup="true" role="tooltip"
+  class="tooltip tooltip-top-left tooltip-validation tooltip-sm"  [class.invalid]="!isValid">
+    <input *ngIf="question.controlType === 'textbox'" [formControlName]="question.key"
+            [id]="question.key" [type]="question.type">
+      <span *ngIf="!isValid" class="tooltip-content">{{question.label}} is required</span>
+
+
+    <select [id]="question.key" *ngIf="question.controlType === 'dropdown'" [formControlName]="question.key"
+[formControlName]="question.key">
+      <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+    </select>
+  </label>
+</div> -->

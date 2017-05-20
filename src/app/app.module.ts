@@ -17,13 +17,17 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { environment } from "../environments/environment";
+import { AddEventComponent } from './add-event/add-event.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventComponent,
     EventDetailsComponent,
-    NavComponent
+    NavComponent,
+    AddEventComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +36,10 @@ import { environment } from "../environments/environment";
     AppRoutingModule,
     ClarityModule.forRoot(),
     UiModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    FormsModule,
+    ReactiveFormsModule,
+    DynamicFormModule
   ],
   providers: [ EventComponent ],
   bootstrap: [AppComponent]

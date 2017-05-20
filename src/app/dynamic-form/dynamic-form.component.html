@@ -1,0 +1,15 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <section class="form-block">
+      <label>Form</label>
+      <div *ngFor="let question of questions">
+        <df-question [question]="question" [form]="form"></df-question>
+      </div>
+</section>
+  <div>
+    <button class="btn" type="submit" [disabled]="!form.valid">Submit</button>
+  </div>
+
+  <div *ngIf="payLoad" class="form-row">
+    Saved values: {{payLoad}}
+  </div>
+</form>
