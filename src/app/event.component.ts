@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { EventsListService } from './events-list.service';
 import { Event } from './event';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthComponent } from './ui/auth/auth.component';
 @Component({
   selector: "events",
@@ -18,7 +18,8 @@ export class EventComponent {
   constructor(
     private eventsListService: EventsListService,
     private router: Router,
-    private auth: AuthComponent
+    private auth: AuthComponent,
+    private activatedRoute: ActivatedRoute
   ) { }
   isToday(event: Event): boolean {
     const today = new Date();
@@ -28,9 +29,6 @@ export class EventComponent {
     return this.eventsListService.getEvents();
   }
   goToEvent(event: Event): void {
-    this.router.navigate(['/manage/events',event.id])
-  }
-  login() {
-    this.auth.login();
+    this.router.navigate([event.id], { relativeTo: this.activatedRoute})
   }
 }
