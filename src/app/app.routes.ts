@@ -4,23 +4,25 @@ import { RouterModule, Routes } from '@angular/router';
 import { EventComponent } from './event.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { AuthComponent } from './ui/auth/auth.component';
-import { AuthGuard } from './auth-guard.service';
+import { AuthGuard } from './ui/auth/auth-guard.service';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AuthService } from './ui/auth/auth.service';
 const routes: Routes = [
 
-  { path: 'manage',
+  { path: 'a',
     children: [
-      { path: '', component: EventComponent, pathMatch: "full" },
+      { path: '', pathMatch: 'full', redirectTo: 'events'},
+      { path: 'events', component: EventComponent, pathMatch: "full" },
       { path: 'events/:id',
       component: EventDetailsComponent } ],
     canActivate: [ AuthGuard ]
   },
   { path: 'auth',
-    component: EventComponent },
+    component: AuthComponent },
  {
    path: '',
    pathMatch: 'full',
-   redirectTo: 'manage'
+   redirectTo: 'a'
  }
 ]
 
@@ -28,6 +30,6 @@ const routes: Routes = [
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ],
-  providers: [ AngularFireAuth, AuthComponent,AuthGuard ]
+  providers: [ AngularFireAuth, AuthService,AuthGuard ]
 })
 export class AppRoutingModule { }

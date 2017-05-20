@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthComponent } from '../../auth/auth.component';
+import { AuthService } from '../../auth/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 
@@ -21,13 +21,13 @@ import { Observable } from 'rxjs/Observable';
     <div class="header-actions">
       <clr-dropdown clrMenuPosition="bottom-right">
         <button class="nav-text" clrDropdownToggle>
-          Test
+          {{ userName }}
           <clr-icon shape="caret down"></clr-icon>
         </button>
         <clr-dropdown-menu>
           <a clrDropdownItem (click)="aboutModal.open = true">About</a>
           <a clrDropdownItem>Preferences</a>
-          <a clrDropdownItem (click)="logOut()">Log out</a>
+          <a clrDropdownItem (click)="logout()">Log out</a>
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>
@@ -38,7 +38,7 @@ import { Observable } from 'rxjs/Observable';
         <a class="nav-link" href="#">Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/manage" routerLinkActive="active">Events</a>
+        <a class="nav-link" routerLink="/a" routerLinkActive="active">Events</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Check-in</a>
@@ -54,18 +54,18 @@ import { Observable } from 'rxjs/Observable';
   <app-about #aboutModal></app-about>
   `,
   styles: [],
-  providers:[AngularFireAuth, AuthComponent]
+  providers:[AngularFireAuth, AuthService]
 })
 export class HeaderComponent implements OnInit {
-
+  userName: string = "Turtle"
   constructor(
-      private auth: AuthComponent
+      private auth: AuthService
   ) { }
 
   ngOnInit() {
   }
-  logOut() {
-    this.auth.logOut();
+  logout() {
+    this.auth.logout();
   }
 
 

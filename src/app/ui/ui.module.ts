@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { AboutComponent } from './layout/about/about.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthComponent } from './auth/auth.component'; //MANY THANKS to https://github.com/angular/angular/issues/15087 for helping me find where BrowserAnimationsModule is
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { AuthComponent } from './auth/auth.component'; //MANY THANKS to https://
     HeaderComponent,
     SidebarComponent,
     MainComponent,
-    AboutComponent],
-    providers: [ AuthComponent]
+    AboutComponent,
+    AuthComponent ],
+    providers: [ AuthService ]
 })
 export class UiModule { }

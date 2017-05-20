@@ -1,43 +1,40 @@
-import { Injectable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
-
-@Injectable(
-  // selector: 'app-auth',
-  // template: `
-  //     <button class="btn" *ngIf="user.uid == null" (click)="login()">Sign in with Google</button>
-  //     <button class="btn" *ngIf="user.uid != null" (click)="logOut()">Sign out</button>
-  //     <div> {{ (user | async)?.uid }} </div>
-  // `,
-  // styles: [],
-  // providers: [AngularFireAuth]
+import { AuthGuard } from './auth-guard.service';
+@Component({
+  selector: 'app-auth',
+  template: `
+      <button class="btn" *ngIf="true" (click)="login()">Sign in with Google</button>
+      <button class="btn" *ngIf="true" (click)="logout()">Sign out</button>
+      <div> {{ (user | async)?.uid }} </div>
+  `,
+  styles: [],
+  providers: [AuthService, AuthGuard]
+}
 )
 export class AuthComponent implements OnInit {
-  user: Observable<firebase.User>;
-  public redirectUrl: String;
-  constructor(public afAuth: AngularFireAuth,
-    private router: Router) {
-    this.user = afAuth.authState;
+
+  constructor(
+    private router: Router,
+    private authguard: AuthGuard
+  ) {
+
  }
 
   ngOnInit() {
   }
   login() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    .then(() => {
-      console.log(this.redirectUrl);
-      this.router.navigate([this.redirectUrl])
-    });
+    // const redirect = this.auth.redirectUrl;
+    // console.log("redirect is",redirect);
+    // this.auth.login().then(() => this.router.navigate([redirect]));
+    this.authguard.auth.login();
   }
-  logOut() {
-    this.afAuth.auth.signOut();
-    this.router.navigate(['/auth']);
+  logout() {
+    this.authguard.auth.logout();
   }
-  setRedirectUrl(url: String) {
-      this.redirectUrl = url;
-  }
+
+
 
 
 }
