@@ -1,9 +1,20 @@
-<div>
-  <ul>
-    <li *ngFor="let event of getEvents()" (click)="goToEvent(event)" [class.current]="isToday(event)">
-      {{ event.name }}
-    </li>
-  </ul>
-</div>
+<h1>My Events</h1>
 
-<button (click)="login()" class="btn">Sign in with Google</button>
+<p>You have access to the events listed below.  To view or edit an event, click its row in the table.</p>
+
+<clr-datagrid>
+  <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
+  <clr-dg-column [clrDgField]="'host'">Host</clr-dg-column>
+  <clr-dg-column [clrDgField]="'startDate'">Start date</clr-dg-column>
+  <clr-dg-column [clrDgField]="'endDate'">End date</clr-dg-column>
+  <clr-dg-row *clrDgItems="let event of getEvents()" (click)="goToEvent(event)" [class.current]="isToday(event)">
+    <clr-dg-cell>{{ event.name }}</clr-dg-cell>
+    <clr-dg-cell>{{ event.host }}</clr-dg-cell>
+    <clr-dg-cell>{{ event.startDate | date: 'short' }}</clr-dg-cell>
+    <clr-dg-cell>{{ event.endDate | date: 'short' }}</clr-dg-cell>
+  </clr-dg-row>
+  <clr-dg-footer class="datagrid-foot">
+    {{ pagination.totalItems }} event<span *ngIf="pagination.totalItems !== 1">s</span>
+    <clr-dg-pagination #pagination></clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
